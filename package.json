@@ -1,0 +1,13 @@
+{
+  "name": "squabble-lib",
+  "description": "High-performance multiuser chat library",
+  "type": "module",
+  "scripts": {
+    "test": "mocha 'test/**/*.js'",
+    "server": "node demo/server.js",
+    "client": "node demo/client.js"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
+}

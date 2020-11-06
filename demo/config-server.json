@@ -1,0 +1,7 @@
+{
+  "appName": "demo-squabble-server",
+  "certificate": {
+    "key": "./server-key.pem",
+    "cert": "./server-cert.pem"
+  }
+}
