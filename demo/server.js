@@ -22,7 +22,7 @@ const start = async () => {
 
   options.authenticators = {
     anonymous: (nickname) => null,
-    token: (token) => (users.find(token) !== undefined ? new User(users[token]) : null)
+    token: (token) => ((users.indexOf(token) >= 0) ? new User(users[token]) : null)
   };
   
   let server = new Server(options, [
