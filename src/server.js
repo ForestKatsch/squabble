@@ -69,7 +69,7 @@ export default class Server {
   }
 
   handleChannelMessage(channel, message) {
-    this.clients.forEach((client) => {
+    this.clients.forEach(async (client) => {
       try {
         await client.sendCommandMessageReceived(message.time, channel.name, message.user.handle, message.message, message.flags);
       } catch(err) {
