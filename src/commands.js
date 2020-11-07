@@ -226,7 +226,7 @@ export const escapeParameter = (param) => {
     return '';
   }
 
-  return param.replace(/\x00/g, '\\0').replace(/>/g, '\\>');
+  return param.replace(/\\/g, '\\\\').replace(/\x00/g, '\\0').replace(/>/g, '\\>');
 };
 
 // Given a code and an array of parameters (or a singular parameter), returns the string command

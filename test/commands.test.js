@@ -133,6 +133,10 @@ describe('escapeParameter', function() {
     assert.strictEqual('\\>', escapeParameter('>'));
   });
 
+  it('should replace \\ with \\\\>', function() {
+    assert.strictEqual('\\\\', escapeParameter('\\'));
+  });
+
 });
 
 // TODO: createCommand
