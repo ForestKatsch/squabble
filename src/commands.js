@@ -50,9 +50,14 @@ export const COMMAND = {
   // Sent from client to server to request joining the channel[s].
   // Parameters: <channel01> <channel02> ...
   CHANNEL_JOIN: 'C10',
-
+  
   // Same as above.
   CHANNEL_LEAVE: 'C11',
+
+  // Bidirectional.
+  // Client parameters: none
+  // Server parameters: <channel01> <channel02> ...
+  CHANNEL_LIST: 'C12',
 
   // Sent from client to server to request a message be sent.
   // Parameters: <channel> <message> <flags?>
@@ -86,7 +91,7 @@ export const COMMAND = {
   // The client sends this command first with a list of extensions it supports,
   // and the reply from the server contains a list of extensions the server supports.
   // Parameters: <extension01:version> <extension02:version> ...
-  EXTENSIONS_AVAILABLE: 'E00',
+  EXTENSIONS_LIST: 'E00',
 
   // Sent from the client to the server.
   // Used to enable extensions.

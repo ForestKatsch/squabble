@@ -235,7 +235,7 @@ export class ClientConnection extends Protocol {
     });
 
     // With token.
-    this.stage(STAGE.ACTION, COMMAND.AUTH_WITH_TOKEN, (command) => {
+    this.stage(STAGE.PARSE, COMMAND.AUTH_WITH_TOKEN, (command) => {
       return {
         ...command,
         args: parametersToArguments(command.parameters, [

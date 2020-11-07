@@ -50,6 +50,8 @@ export class SocketTransport extends Transport {
       ...options
     };
 
+    this.buffer = '';
+
     this.socket = this.options.socket;
 
     this.handleSocketData = this.handleSocketData.bind(this);
@@ -155,15 +157,23 @@ export class SocketTransport extends Transport {
   // ## Socket handling.
   
   async handleSocketData(data) {
+    this.buffer += data;
+    
     try {
-      let commands = data.split(/\x00/g);
+      let commands = this.buffer.split(/\x00/g);
+
+      if(commands[commands.length-1].endsWith('\x00')) {
+        this.buffer = '';
+      } else {
+        this.buffer = commands.pop();
+      }
 
       for(let command of commands) {
         this.protocol.handleCommand(command);
       }
       
     } catch(err) {
-      this.handleError(err);
+      this.handleSocketError(err);
     }
   }
 
@@ -200,7 +210,7 @@ export class SocketTransport extends Transport {
       if(this.socket.readyState !== 'open') {
         reject(new Error('socket-closed'));
       } else {
-        this.socket.write(msg, resolve);
+        this.socket.write(msg + '\x00', resolve);
       }
     });
   }
