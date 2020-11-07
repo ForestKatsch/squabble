@@ -78,6 +78,7 @@ export default class Server {
 
   // Kick all clients and end our server.
   async quit() {
+    console.log('Shutting down server.');
     let clients = [...this.clients];
 
     let promises = clients.map((client) => {

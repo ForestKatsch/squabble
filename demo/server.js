@@ -30,6 +30,12 @@ const start = async () => {
   ]);
 
   await server.start(options.host, options.port);
+
+  process.on('SIGINT', async () => {
+    await server.quit();
+    process.exit();
+  });
+
 }
 
 start();
