@@ -29,7 +29,7 @@ const start = async () => {
     new SocketTransport()
   ]);
 
-  await server.start('localhost', 21759);
+  await server.start(options.host, options.port);
 }
 
 start();

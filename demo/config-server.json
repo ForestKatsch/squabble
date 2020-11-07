@@ -3,5 +3,7 @@
   "certificate": {
     "key": "./server-key.pem",
     "cert": "./server-cert.pem"
-  }
+  },
+  "host": "localhost",
+  "port": 21759
 }

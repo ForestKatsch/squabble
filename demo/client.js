@@ -23,7 +23,7 @@ const start = async () => {
   let client = new Client(options, transport);
 
   try {
-    await client.connect('localhost', 21759);
+    await client.connect(options.host, options.port);
   } catch(err) {
     console.log('Failed to connect!');
   }
