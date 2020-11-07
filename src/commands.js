@@ -149,8 +149,8 @@ export const parseParameters = (parameterString) => {
       escaping = false;
 
       // Every other character is included verbatim.
-      if(character === '0') {
-        character = '\x00';
+      if(character === 'n') {
+        character = '\0';
       }
 
     } else if(character === '>') {
@@ -231,7 +231,7 @@ export const escapeParameter = (param) => {
     return '';
   }
 
-  return param.replace(/\\/g, '\\\\').replace(/\x00/g, '\\0').replace(/>/g, '\\>');
+  return param.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/>/g, '\\>');
 };
 
 // Given a code and an array of parameters (or a singular parameter), returns the string command

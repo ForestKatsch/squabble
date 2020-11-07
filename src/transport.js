@@ -160,9 +160,9 @@ export class SocketTransport extends Transport {
     this.buffer += data;
     
     try {
-      let commands = this.buffer.split(/\x00/g);
+      let commands = this.buffer.split(/\n/g);
 
-      if(commands[commands.length-1].endsWith('\x00')) {
+      if(commands[commands.length-1].endsWith('\n')) {
         this.buffer = '';
       } else {
         this.buffer = commands.pop();
@@ -210,7 +210,7 @@ export class SocketTransport extends Transport {
       if(this.socket.readyState !== 'open') {
         reject(new Error('socket-closed'));
       } else {
-        this.socket.write(msg + '\x00', resolve);
+        this.socket.write(msg + '\n', resolve);
       }
     });
   }
