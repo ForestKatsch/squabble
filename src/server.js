@@ -118,6 +118,11 @@ export default class Server {
       throw new Error('no-channel');
     }
 
+    if(message === '/quit') {
+      client.quit();
+      return;
+    }
+
     channel.message(client.user, message, flags);
   }
 
