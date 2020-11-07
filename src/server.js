@@ -80,9 +80,11 @@ export default class Server {
   async quit() {
     let clients = [...this.clients];
 
-    for(let client of clients) {
-      await client.quit();
-    }
+    let promises = clients.map((client) => {
+      return client.quit();
+    });
+
+    await Promise.all(promises);
 
     // TODO: end transports.
   }
