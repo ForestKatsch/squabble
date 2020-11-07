@@ -75,16 +75,8 @@ const start = async () => {
   
   client.on('end', rl.close.bind(rl));
 
-  let exiting = false;
-
   // Properly handle Ctrl-C.
-  process.on('SIGINT', async () => {
-    if(exiting) {
-      return;
-    }
-
-    exiting = true;
-    
+  rl.on('SIGINT', async () => {
     await client.quit();
     process.exit();
   });

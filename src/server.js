@@ -90,6 +90,10 @@ export default class Server {
   addClient(client) {
     this.clients.add(client);
   }
+
+  removeClient(client) {
+    this.clients.delete(client);
+  }
   
   // Returns the user object for this user, or `null` if the user is not allowed to join.
   authenticateWithAnonymous(client, handle) {
@@ -138,6 +142,7 @@ export class ClientConnection extends Protocol {
     console.log(`New client connected from ${this.transport.getNetworkName()}`);
 
     this.once('end', () => {
+      this.server.removeClient(this);
       console.log(`Client disconnected from ${this.transport.getNetworkName()}`);
     });
   }
