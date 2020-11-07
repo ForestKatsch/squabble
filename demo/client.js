@@ -6,10 +6,34 @@ import * as path from 'path';
 
 import {createInterface} from 'readline';
 
+const printUsage = () => {
+  console.log(`Usage: ${process.argv[0]} host:port token`);
+}
+
 const start = async () => {
   
   let options = JSON.parse(fs.readFileSync(path.resolve('demo/config-client.json')));
+
+  let args = process.argv.slice(2);
   
+  if(args.length <= 1) {
+    printUsage();
+    return;
+  }
+
+  let serverAddress = args[0];
+
+  if(serverAddress.indexOf(':') > 0) {
+    options.host = serverAddress.split(':')[0];
+    options.port = serverAddress.split(':')[1];
+  } else {
+    options.host = serverAddress;
+  }
+
+  if(args.length >= 2) {
+    options.authentication.token = args[1];
+  }
+
   let transport = new SocketTransport();
 
   /*
