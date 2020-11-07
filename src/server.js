@@ -43,13 +43,21 @@ export default class Server {
     }
     
     if(!(name in this.channels)) {
-      let channel = new Channel(name);
-      this.initChannel(channel);
-      
-      this.channels[name] = channel;
+      if(this.options.channels.createOnJoin) {
+        this.channels[name] = this.createChannel(name);
+      }
     }
     
     return this.channels[name];
+  }
+
+  createChannel(name) {
+    console.log(`Creating channel '${name}'`);
+    let channel = new Channel(name);
+    
+    this.initChannel(channel);
+    
+    this.channels[name] = channel;
   }
 
   initChannel(channel) {
@@ -66,7 +74,7 @@ export default class Server {
 
   // TODO: validate.
   isValidChannelName(name) {
-    return true;
+    return name.startsWith('#') || name.startsWith('@');
   }
 
   // Convenience function.
