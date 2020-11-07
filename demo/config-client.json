@@ -4,6 +4,9 @@
     "type": "token",
     "token": "18e8304a-db2c-4298-bf47-3e572aa9d9da"
   },
+  "certificates": [
+    "demo/server-cert.pem"
+  ],
   "host": "localhost",
   "port": 21759
 }

@@ -113,7 +113,7 @@ export class SocketTransport extends Transport {
   async connectToServer(host, port) {
     return new Promise((resolve, reject) => {
       const options = {
-        ca: this.options.certificates
+        ca: this.protocol.options.certificates
       };
 
       this.socket = tls.connect(port, host, options, async () => {

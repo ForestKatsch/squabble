@@ -16,7 +16,7 @@ const start = async () => {
 
   let args = process.argv.slice(2);
   
-  if(args.length <= 1) {
+  if(args.length < 1) {
     printUsage();
     return;
   }
@@ -34,15 +34,13 @@ const start = async () => {
     options.authentication.token = args[1];
   }
 
-  let transport = new SocketTransport();
-
-  /*
-  {
-    certificates: [
-      fs.readFileSync('server-cert.pem')
-    ]
+  if(options.certificates) {
+    options.certificates = options.certificates.map((cert) => {
+      return fs.readFileSync(path.resolve(cert), 'utf8');
+    });
   }
-  */
+
+  let transport = new SocketTransport(options);
 
   let client = new Client(options, transport);
 

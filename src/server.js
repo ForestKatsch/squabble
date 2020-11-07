@@ -31,6 +31,8 @@ export default class Server {
     // Key/value listing of all channels.
     this.channels = {};
 
+    this.createChannel('#general');
+
     // A set of connection objects.
     this.clients = new Set();
   }
@@ -44,7 +46,7 @@ export default class Server {
     
     if(!(name in this.channels)) {
       if(this.options.channels.createOnJoin) {
-        this.channels[name] = this.createChannel(name);
+        this.createChannel(name);
       }
     }
     
